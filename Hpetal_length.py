@@ -13,8 +13,8 @@ plt.title("Petal Length All Sprecies")
 
 plt.show()
 
-plt.savefig("petal_length.png")
-plt.clf
+# plt.savefig("petal_length.png")
+# plt.clf
 #-----------------------------------------------------------------------------
 # To do: 
 # 1. Create separate histogram for each variable OF EACH SPECIES?
