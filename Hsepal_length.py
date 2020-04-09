@@ -13,8 +13,8 @@ plt.title("Sepal Length All Species")
 
 plt.show()
 
-plt.savefig("sepal_length.png")
-plt.clf
+# plt.savefig("sepal_length.png")
+# plt.clf
 #-----------------------------------------------------------------------------
 # To do: 
 # 1. Create separate histogram for each variable OF EACH SPECIES?
