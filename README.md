@@ -17,7 +17,7 @@ This project features an in-depth look at Ronald Fisher's Iris data set. This fa
 ## Facts on Iris Dataset
 This is a balanced dataset because there is an equal quantity of datapoints or vectors for each variable.
 
-## References: 
+## Research: Notes 1-12 below from  'Appliedaicourse.com - Plotting for exploratory data analysis (EDA)' - https://www.appliedaicourse.com/course/11/Applied-Machine-learning-course
 
 ### Notes 1-3 below focus on the use of SCATTERGRAMS with Seaborn.
 **The draft copy for scattergrams in this repository is 'draft_scattergram.py'.** 
@@ -170,7 +170,7 @@ Below is a median with an outlier:
 - print(np.median(df_virginica["petal_length"] ))
 - print(np.median(df_versicolour["petal_length"] ))
 
-### 7. ** Quantiles and Percentiles.**
+### 7. ** Quantiles, Percentiles, MAD and IQR.**
 **7(a): Quantiles.**
 - Take a sorted dataset with 100 values, sprted = s: xS = {1, 2, 3, 4 ... 100}
 - Median x = take the 2 middle values, 50 & 51, find the mean of these two numbers.
@@ -209,6 +209,31 @@ Below is a median with an outlier:
 
 - When working with very large datasets, using the higher percentiles, such as 95th or 99th percentiles can be very useful, to understand waiting times for delivery to a large number of customers for example.
 
+- **7(d):Median Absolute Deviation.**
+- We have looked at Std-dev and that it is the average distance of each of the vectors from the mean value of the dataset. Or more specifically, Std-dev tells us what is the typical deviation of each point from the mean. 
+
+- Median Absolute Deviation is undetstood by taking the median point, and imagining one point either side, X2 on the left, and X1 on right. If you want to know the distance between X1 and the median you would calculate Xi - Median. This calculation will tell you the deviation. Since the calculated deviation is required to be positive, you will calculate from X1 as this will give you a positive, or absolute result. 
+- The term Median in MAD, tells us that you are looking for the median of the absolute deviations of all the points being investigated against the median. Takke the median, for each point measure its distance from the median and compute absolute values so that both positive and negative values are resulted.
+- We care about the distance, not the sign. 
+- MAD does the same thing as Std-dev - measuring how far away a point is from the 'central tendency' - however it is calculated from the Median, not the Mean - therefore, it is less likely to be corrupted by an outlier. 
+
+- **7(e):**
+- Scripting for the MAD of PL of the 3 species; import robust module first:
+- **from statsmodels import robust** 
+
+- **print("\nMedian Absolute Deviation")**
+- **print(robust.mad(df_setosa["petal_length"]))**
+- **print(robust.mad(df_virginica["petal_length"]))**
+- **print(robust.mad(df_versicolor["petal_length"]))**
+
+- To conclude: Median is the equivalent of Mean, except Median does not face corruption with 'outliers',
+whilst Median Absolute Deviation is one idea which is equivalent to Standard Deviation.
+
+- **7(f): Inter-Quartile Range (IQR).**
+- IQR is found by taking the 75th percentile value and subtracting the 25th percentile value.
+- E.g. 75th Percentile of Setosa PL = 1.575, 25th Percentile of PL = 1.4, therefore IQR = 0.175.
+- Understanding IQR is useful because within this range, lies 50% of your data. 
+
 ### **8. Box Plots - refer to file 'draft_boxplot.py'**
 - **8(a): Understanding Box Plots.** 
 - The tool we use to represent percentiles and quantiles in a 2-d graph is Box Plots. 
@@ -225,3 +250,110 @@ Below is a median with an outlier:
 - **8(b): Whiskers.**
 - The extended 2 lines shooting out of the box are called 'the whiskers'. Some modules calculate these whiskers by taking 1.5 the IQR value (25th to 75th percentiles). They may also be drawn based on the max and min values of the set.
 - Normally the whiskers represent the range within which most of a species vectors are located.
+
+### 9. **Cumulative Distribution Function (CDF)**
+- **9(a):Diffrence between Probability Density Function and CDF:**
+- As graphed on line graph of Petal Length (Setosa) against probabilities.
+- Reference graph of CDF uses versus PDF uses found in supporting material document.
+- Probability plots always start at 0 at the bottom of Y axis and end with 1.0 at the toop of Y axis.
+- Both CDF and PDF can both be plotted on porbability plots.
+- With CDF plot, find a point on the CDF line and draw a horizontal line cutting to the Y axis, and a verticle line cutting to the X axis (in this example the X axis is Petal Length).
+- A reading of 1.6 on the X axis and of 0.82 on the Y axis tells you that 82% of Setosa flowers have a petal length of 1.6 or lower.
+
+- **9(b): How are CDFs Built?**
+- A PDF is basically a 'smoothed' out histogram.
+- The Y axis probability tells us the percentage of vectors in the set that have X length of Petal or less.
+- Looking again at a plot of Setosa Petal length probability, taking an X value of 1.6, say you have 41 Setosa flowers with PL of 1.6 or less, dividing 41 by the total number of vectors gives you the corresponding Y value, 0.82 (82%), this can then be marked on the Y axis. You repeat this for every X value or measurement of PL in Setosa and the range of PL and corresponding probability for each individual point gives you the CDF line.
+
+- Another way to build CDF, is by looking at the PDF line (which counts how many flowers have a certain petal length) calculating this for each PL, (as histograms do) and adding the associated PDF Y values together up to a certain point on the graph. 
+- Thinking back to the bars on the histogram, imagine there are 6 bars of varying heights up until the X value Petal Length of 1.6, for each bar, adding the associated Y value probabilities together will give you the CDF value up until PL 1.6. 
+- In this case CDF lines are similar to percentiles in that they tell you the cumulative probability of the presence of PL up until a certain X-value point.
+- Even though it is not intuitive looking at a graph with a PDF and a CDF graph, by taking points on both curves that allign with the same X-value point - from this point the CDF is not only seen on the CDF line, but also the entire area under the PDF curve - this area as a whole is equal to the CDF.
+- This is more easily understood by saying that if you 'differentiate' the CDF, you get the PDF.
+AND
+- If you do 'integration' on the PDF you get the CDF. 
+
+- **9(c): Code for PDF and CDF.**
+- Compute and plot PDF of petal_length:
+- **counts_bin_edges = np.histogram(df_setosa['petal_length'], bins = 10, density = True)**
+- **pdf = counts / (sum(counts) )** - this line specifically computes PDF.
+- **print(pdf)**
+- **print(bin_edges)**
+ 
+- Compute the CDF:
+- **cdf = np.cumsum(pdf)** - This line features the cumulative sum function of Numpy.
+- Plotting CDF:
+- **plt.plot(bin_edges[1:], pdf)**
+- **plt.plot(bin_edges[1:], cdf)**
+
+- **9(d): How is CDF Useful?**
+- Taking a plot featuring both PDF and CDF of each of the 3 species (6 curves on 1 graph), and imagining you had no prior knowledge of the Iris dataset, you can immediately determine what the highest vector is for each species. 
+- You can therefore say  for example, that 100% of setosa flowers have a PL of < 2. 
+
+- Analysing Virginica and Versicolor is more difficult. But still provides valuable insights.
+- You can pinpoint the intersection of the PDF lines of Virginica and Versicolour at X-value 5. Drawing a verticle line, you correspond this point of intersection with the PDF of Virginica and then to it's Y-value - this gives you a Y-value of 0.95 (95%). This tells you that 95% of Virginica have a PL of 5 or less.
+- Drawing a horizontal line from the CDF point for Versicolor corresponding to the intersection point, to the Y-axis, you can a figure of 0.1 (10%). This will function as the point at which you cut off your study of Virginica for Versiclor. You now know from looking at the CDF of Versicolor that you will be investigating the remaining 90% of Versicolor. 
+- I.e. There will be 90% accuracy on your investigation of Versicolor as 10% of Versicolor vectors are muddled with the Virginica.
+
+- **9(e): Creating an If for CDF of Virginica and Versicolor:**
+- If rule for analysing Virginica, with an upper limit set at the X-value 5 and 95% accuracy:
+- **if PL > 2:**
+-   **& PL <= 5:**
+    **Then Virginica**
+
+- If rule for analysing Versicolor, with a lower limit set at X-value 5 and 90% accuracy:
+- **if PL > 2:**
+-   **& PL > 5:**
+    **Then Versicolor**
+
+- This such information cannot be understood with PDF, it is whem the CDF is applied, you can understand cut-off points for analysis and the rates of error that will apply to them.
+
+### 10. **Violin Plots.**
+- **10(a):**
+- A violin plot is a combination of a histogram and a PDF into a simpler format. Denser regions of the dataset are the fatter areas of the 'violins', whilst sparser regions of the data are represented by the thinner parts of the violin.
+- The thick black line in the middle of the violin with the white dot, has a relationship to the box-plot.
+- Moving down this vertical thick line, from where the line begins higher up represents the 75th percentile, the white dot represents the 50th percentile and the end of the thick line represents the 25th percentile. 
+- The two thinner lines ejecting from either vertical end of the thick line represent the 'whiskers' of the box plot. The end of the these thinner lines corresponding to the two horizontal whiskers of a box plot. 
+
+- Code for graphing a violin plot:
+- **sns.violinplot(x = "species", y = "petal_length", data = df, size = 8)**
+- **plt.show()**
+
+- **10(b): What is the significance of the colored region of the violin?**
+- We immediately notice that both sides of the violin are symmetrical. We also see that the shape of the violin looks similar to a bell curve.
+- The side of the violin represents the Probability Distribution Function (PDF), essentially what is represented in a histogram - turining your head sideways illustrates this.
+
+- Therefore, a violin plot takes the histogram (colored region) and the box plot and combining them into a single plot. In this way, the violin plot gives you the best of both worlds: you can tell what the distribution is and you can also read the percentile values. 
+
+### 11. **Univariate, Bivariate and Multivariate Analysis.**
+- PDF, CDF, box plots, violin plots - these do univariate analysis. 
+- Pairplots and scatter plots do bivariate analysis as they investigate 2 variables.
+- Multivariate analysis is the study of multiple is when you are investigating more than 2 variables, e.g. a 3-dimensional scatter plot. 
+- Multivariate analysis has a large subject and includes the entire field of machine learning. Therefore, in creating a plotting scheme to incorporate all 4 variables in the Iris Dataset, you will be carrying out multivariate analysis.
+
+### 12. **Multivariate Probability Density - Contour Plots.**
+- **12(a): Conceptualising a Contour Plot:**
+- We have looked at 1-dimensional probability functions such as histograms, box plots, violin plots etc. 
+- We will now investigate how to create a probability density plot with more than 1 dimensions.
+
+- Script for 2D density 'Contours Plots':
+- **sns.jointplot(x = "petal_length", y = "petal_width", data = df_setosa, kind = "kd)**
+- **plt.show()**
+
+- Contour plots can resemble a 'wormhole' as depicted in sci-fi. 
+- The above script creates a contour plot featuring PL on the x-axis and PW on the Y-axis. This plot investigates the same data as the 12th scatter plot in the pairplot for Setosa previously created, except excluding the 2 other species as subjects.
+- Looking the grouping of the dots in this pervious scatter plot we see that most of the dots are densely grouped in the centre, with those on the outside being sparsely populated. 
+- Taking this knowledge of how PL and PW of setosa are grouped in a scatter plot and looking at the Contours Plot, we'll notice that the densely grouped centre is represented here by the black central hole, the darest part of the plot. 
+- To conceptualise what is being represented in the Contour plot it is helpful to imagine a hill extending out of the screen from the centre of the plot. With the centre darkest point being the peak of the hill and representing the densest data group and the lighter outlines being the lower level of the hill, representing the sparser data.
+
+- **12(b): What are the contour lines representing?**
+- The various shades of colour of the 'hill' are the contours themselves. 
+- Prior to the advent of modern computing, when graphs of this nature were not being built by computers for datasets, Cathographers utilised the same concept of contour plots when mapping a hill of varied altitude. In the maps, and in todays maps still, each shade represented a specific altitude (or range of altitude).
+- The contours in Seaborn plots similarly represent measures of probability of the two axis values (PL and PW).
+- The darker contours represent higher probabilities (or higher probability density), whilst the lighter outer contours represent lower probability density. 
+- In Seaborn Contour Plots are generated with 2 supplementary PDF plots, for both axis values, these are displayed along the edges of the graph. This provides both instances of the 1-d variables being represented in the contour plot.
+- Therefore, 1-d density plots are achieved using PDF graphs and 2-d density plots are achieved using Contour Density Plots.
+
+- From looking at a Contour plot, we can understand that the darker contours represent the most common PL and PW measurements (as read off the x and y axes). The black central contour therefore, corresponds to the combination of both peaks from the 2 supplementary 1-d PDF graphs. 
+
+- 3-density plots are much more difficult to visualise as it requires an conceptualisation of 4-dimensions. However, using tools of 1-d, 2-d, and 3-d analysis is sufficient to have a mathematical understanding of 4-d and onwards.
