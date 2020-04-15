@@ -11,19 +11,16 @@
 #------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
-df = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
-
-sL = df["sepal_length"]
-sW = df["sepal_width"]
-
-plt.scatter(df['sepal_length'], df['sepal_width'] )
-# or plt.scatter(sL, sW)
-plt.xlabel('Sepal Length')
-plt.ylabel('Sepal Width')
-plt.title("Sepal Length Versus Sepal Width (ALL SPECIES)")
-#plt.legend()
+iris = pd.read_csv('IrisDataset.csv')
+sns.set_style("whitegrid")
+df = sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=iris)
+plt.title("Iris Flowers: Sepal Length Vs Sepal Width")
 plt.show()
 
-plt.savefig("scatter1-SLvSW.png")
-plt.clf
+
+
+# Looking at the scatter plot it's noted that setosa can be distinguised from the other species
+# by using linear separation.
+

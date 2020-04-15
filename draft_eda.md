@@ -61,7 +61,7 @@ It must be noted that there will be some Virginica vectors included in this calc
 - Taking a histogram of each of the 4 variables, and on each histogram having all 3 species represented together, we can figure out the most 'useful' variable.
 
 **4(b): Petal Length Histogram:**
-- Through analysis of Setosa PL and PW in scattergram PairPlots it has already been demonstrated that Setosa has a low value in both of these variables. Specifically looking at hte hostogram of PL of Setosa, it is noted that there are no Setosas with a value greater than 2.
+- Through analysis of Setosa PL and PW in scattergram PairPlots it has already been demonstrated that Setosa has a low value in both of these variables. Specifically looking at histogram of PL of Setosa, it is noted that there are no Setosas with a value greater than 2.
 - In this case a high peak, representing the whole distribution is seen for Setosa PL. There is some separation between Versicolour and Virginica.
 
 **4(c): Petal Width Histogram:**
@@ -304,7 +304,7 @@ AND
 - We immediately notice that both sides of the violin are symmetrical. We also see that the shape of the violin looks similar to a bell curve.
 - The side of the violin represents the Probability Distribution Function (PDF), essentially what is represented in a histogram - turining your head sideways illustrates this.
 
-- Therefore, a violin plot takes the histogram (colored region) and the box plot and combining them into a single plot. In this way, the violin plot gives you the best of both worlds: you can tell what the distribution is and you can also read the percentile values. 
+- Therefore, a violin plot takes the histogram (colored region) and the box plot and combines them into a single plot. In this way, the violin plot gives you the best of both worlds: you can tell what the distribution is and you can also read the percentile values. 
 
 ### 11. **Univariate, Bivariate and Multivariate Analysis.**
 - PDF, CDF, box plots, violin plots - these do univariate analysis. 

@@ -10,18 +10,12 @@
 #------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
-df = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
-
-sL = df["sepal_width"]
-sW = df["petal_length"]
-
-plt.scatter(df['sepal_width'], df['petal_length'] )
-# or plt.scatter(sL, sW)
-plt.xlabel('Sepal Width')
-plt.ylabel('Petal Length')
-plt.title("Sepal Width Versus Petal Length (ALL SPECIES)")
-#plt.legend()
+iris = pd.read_csv('IrisDataset.csv')
+sns.set_style("whitegrid")
+df = sns.scatterplot(x="sepal_width", y="petal_length", hue="species", data=iris)
+plt.title("Iris Flowers: Sepal Width Vs Petal Length")
 plt.show()
 
 #plt.savefig("scatter4-SWvPL.png")

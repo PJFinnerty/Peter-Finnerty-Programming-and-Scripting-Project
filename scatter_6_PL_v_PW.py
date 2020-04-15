@@ -1,6 +1,6 @@
 # Peter Finnerty - Project - Scattergrams.
 
-# Output a scattergram of each variable to png files.
+# Output a scattergram of each pair of variables to png files.
 #  This program will create a scattergram of (a)Iris setosa, (b)Iris virginica 
 # and (c)Iris versicolor.
 
@@ -11,7 +11,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
+df = pd.read_csv('IrisDataset.csv')
 
 sL = df["petal_length"]
 sW = df["petal_width"]
