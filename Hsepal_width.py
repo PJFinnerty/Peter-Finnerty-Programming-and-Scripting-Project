@@ -5,14 +5,25 @@
 #------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
-df = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
+df = pd.read_csv('IrisDataset.csv')
 
-plt.hist(df["sepal_width"])
-plt.title("Sepal Width All Sprecies")
+bins = [2, 2.25, 2.5, 2.75, 3, 3.25, 3.5, 3.75, 4, 4.25, 4.5]
+plt.hist(df["sepal_width"], bins = bins, color='purple', edgecolor='black')
+
+plt.style.use('fivethirtyeight')
+plt.title("Sepal Width of Iris Flowers")
+plt.xlabel('Sepal Width (cm)')
+plt.ylabel('No. of observations')
+plt.tight_layout()
+plt.legend()
+
+median_SW = 3
+color = '#fc4f30' 
+plt.axvline(median_SW, color=color, label='Median Sepal Width', linewidth=4)
 
 plt.show()
-
 # plt.savefig("sepal_width.png")
 # plt.clf
 #-----------------------------------------------------------------------------

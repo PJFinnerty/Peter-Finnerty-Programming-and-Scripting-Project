@@ -5,14 +5,25 @@
 #------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
-df = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
+df = pd.read_csv('IrisDataset.csv')
 
-plt.hist(df["sepal_length"])
-plt.title("Sepal Length All Species")
+bins = [4.25, 4.5, 4.75, 5, 5.25, 5.5, 5.75, 6, 6.25, 6.5, 6.75, 7, 7.25, 7.5, 7.75, 8]
+plt.hist(df["sepal_length"], bins = bins, color='green', edgecolor='black')
+
+plt.style.use('fivethirtyeight')
+plt.title("Sepal Length of Iris Flowers")
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('No. of observations')
+plt.tight_layout()
+plt.legend()
+
+median_SL = 5.8
+color = '#fc4f30' 
+plt.axvline(median_SL, color=color, label='Median Sepal Length', linewidth=4)
 
 plt.show()
-
 # plt.savefig("sepal_length.png")
 # plt.clf
 #-----------------------------------------------------------------------------

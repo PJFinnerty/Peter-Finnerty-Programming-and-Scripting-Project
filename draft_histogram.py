@@ -24,7 +24,7 @@ print("\n", df.shape) # (150, 5)
 print("\n", df.columns) # Index(['sepal_length', 'sepal_width', 'petal_length', 'petal_width',
 # 'species'], dtype='object')
 
-print("\n", df["species"].value_counts() ) # virginica     50, setosa        50, versicolor    50
+print(df["species"].value_counts() ) # virginica     50, setosa        50, versicolor    50
 # Name: species, dtype: int64
 
 print("\n", df) # (entire dataset)

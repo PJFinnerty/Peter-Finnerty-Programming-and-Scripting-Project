@@ -5,11 +5,23 @@
 #------------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
-df = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
+df = pd.read_csv('IrisDataset.csv')
 
-plt.hist(df["petal_width"])
-plt.title("Petal Width All Sprecies")
+bins = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75]
+plt.hist(df["petal_width"], bins = bins, edgecolor='black')
+
+plt.style.use('fivethirtyeight')
+plt.title("Petal Width of Iris Flowers")
+plt.xlabel('Petal Width (cm)')
+plt.ylabel('No. of observations')
+plt.tight_layout()
+plt.legend()
+
+median_PW = 1.3
+color = '#fc4f30' 
+plt.axvline(median_PW, color=color, label='Median Petal Width', linewidth=4)
 
 plt.show()
 
