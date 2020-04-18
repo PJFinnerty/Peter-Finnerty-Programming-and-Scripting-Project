@@ -22,7 +22,6 @@ plt.xlabel('Petal Length')
 plt.ylabel('Petal Width')
 plt.title("Petal Length Versus Petal Width (ALL SPECIES)")
 #plt.legend()
-plt.show()
-
-#plt.savefig("scatter6-PLvPW.png")
+#plt.savefig("scatter6.png")
 #plt.clf
+#plt.show()

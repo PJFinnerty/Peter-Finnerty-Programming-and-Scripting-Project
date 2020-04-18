@@ -12,7 +12,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 #------------------------------------------------------------------------
-df = pd.read_csv("https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv")
+df = pd.read_csv('IrisDataset.csv')
 
 # Calculating the mean PL of (a)Setosa, (B)Virginica and (C)Versicolour, with an 'Outlier':
 print(np.mean(df_setosa ["petal_length"] ) )

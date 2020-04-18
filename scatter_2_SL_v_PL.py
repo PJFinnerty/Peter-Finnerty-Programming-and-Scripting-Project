@@ -16,7 +16,6 @@ iris = pd.read_csv('IrisDataset.csv')
 sns.set_style("whitegrid")
 df = sns.scatterplot(x="sepal_length", y="petal_length", hue="species", data=iris)
 plt.title("Iris Flowers: Sepal Length Vs Petal Length")
-plt.show()
-
-#plt.savefig("scatter2-SLvPL.png")
+#plt.savefig("scatter2.png")
 #plt.clf
+#plt.show()

@@ -17,8 +17,9 @@ iris = pd.read_csv('IrisDataset.csv')
 sns.set_style("whitegrid")
 df = sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=iris)
 plt.title("Iris Flowers: Sepal Length Vs Sepal Width")
-plt.show()
-
+#plt.savefig("scatter1.png")
+#plt.clf
+#plt.show()
 
 
 # Looking at the scatter plot it's noted that setosa can be distinguised from the other species

@@ -20,9 +20,11 @@ plt.xlabel('Petal Width (cm)')
 plt.ylabel('No. of observations')
 plt.tight_layout()
 # Marking out a median line.
-median_PW = 1.3
-color = '#fc4f30' 
-plt.axvline(median_PW, color=color, label='Median Petal Width', linewidth=4)
+# median_PW = 1.3
+# color = '#fc4f30' 
+# plt.axvline(median_PW, color=color, label='Median Petal Width', linewidth=4)
+plt.savefig("Hpetal_width.png")
+plt.clf
 plt.show()
 #-------------------------------------------------------------------------------
 
@@ -56,8 +58,6 @@ plt.show()
 from statsmodels import robust
 print(robust.mad(df["petal_width"]) )
 
-# plt.savefig("petal_width.png")
-# plt.clf
 #-----------------------------------------------------------------------------
 # To do: 
 # 1. Create separate histogram for each variable OF EACH SPECIES?

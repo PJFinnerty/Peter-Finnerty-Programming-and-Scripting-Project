@@ -21,9 +21,11 @@ plt.ylabel('No. of observations')
 plt.tight_layout()
 plt.legend()
 # Marking out a median value line.
-median_SW = 3
-color = '#fc4f30' 
-plt.axvline(median_SW, color=color, label='Median Sepal Width', linewidth=4)
+# median_SW = 3
+# color = '#fc4f30' 
+# plt.axvline(median_SW, color=color, label='Median Sepal Width', linewidth=4)
+plt.savefig("Hsepal_width.png")
+plt.clf
 plt.show()
 #-------------------------------------------------------------------------------
 
@@ -54,9 +56,6 @@ plt.show()
 # Calculate the Median Absolute Deviation
 from statsmodels import robust
 print(robust.mad(df["sepal_width"]) )
-
-# plt.savefig("sepal_width.png")
-# plt.clf
 #-----------------------------------------------------------------------------
 # To do: 
 # 1. Create separate histogram for each variable OF EACH SPECIES?

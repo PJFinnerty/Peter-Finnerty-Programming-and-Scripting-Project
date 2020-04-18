@@ -23,11 +23,13 @@ plt.ylabel('No. of observations')
 plt.tight_layout()
 plt.legend()
 # Mark out a median value line.
-median_PL = 4.35
-color = '#fc4f30'
-plt.axvline(median_PL, color=color, label='Median Petal Length', linewidth=2.5)
-
+# median_PL = 4.35
+# color = '#fc4f30'
+# plt.axvline(median_PL, color=color, label='Median Petal Length', linewidth=2.5)
+plt.savefig("Hpetal_length.png")
+plt.clf
 plt.show()
+
 #-------------------------------------------------------------------------------
 
 # Creating box plot.
@@ -58,8 +60,6 @@ plt.show()
 from statsmodels import robust
 print(robust.mad(df["petal_length"]) )
 
-# plt.savefig("petal_length.png")
-# plt.clf
 #-----------------------------------------------------------------------------
 # To do: 
 # 1. Create separate histogram for each variable OF EACH SPECIES?
