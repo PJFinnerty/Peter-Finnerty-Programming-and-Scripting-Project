@@ -9,84 +9,115 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 df = pd.read_csv('IrisDataset.csv')
-
-
-#-----------------------------------------------------------------------------
-
-# Histogram of Petal Length (all species)
-# Create hist with bin measures se t to bins list.
-PL = np.array( df['petal_length'])
-sns.set()
-plt.hist(PL, bins = 20, edgecolor='black')
-# Set the histrogram style.
-plt.style.use('fivethirtyeight')
-# Format the histogram as appropriate.
-plt.title("Petal Length of Iris Flowers")
-plt.xlabel('Petal Length (cm)')
-plt.ylabel('No. of observations')
-plt.tight_layout()
-# Mark out a median value line.
-# median_PL = 4.35
-# color = '#fc4f30'
-# plt.axvline(median_PL, color=color, label='Median Petal Length', linewidth=2.5)
-plt.savefig("Hpetal_length.png")
-plt.clf
-plt.show()
 #------------------------------------------------------------------------------
 
-# Histogram of Petal Width (all species)
+# Histogram of Petal Length (all species)
 # Create hist with bin measures set to bins list.
-bins = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75]
-plt.hist(df["petal_width"], bins = bins, edgecolor='black')
+sns.FacetGrid(df,hue="species",height=5.5).map(sns.distplot,"petal_length").add_legend()
+plt.xlabel("Petal Length (cm)")
+plt.ylabel("Occurrance")
 # Format histogram style.
+sns.set_style("darkgrid")
 plt.style.use('fivethirtyeight')
-plt.title("Petal Width of Iris Flowers")
-plt.xlabel('Petal Width (cm)')
-plt.ylabel('No. of observations')
+plt.title("Petal Length of Iris Flowers")
 plt.tight_layout()
-# Marking out a median line.
-# median_PW = 1.3
-# color = '#fc4f30' 
-# plt.axvline(median_PW, color=color, label='Median Petal Width', linewidth=4)
-plt.savefig("Hpetal_width.png")
+plt.savefig("Hpetal_length.png")
 plt.clf
 plt.show()
 #-------------------------------------------------------------------------------
 
-# Histogram of Petal Length (all species)
-# Create hist with bin measures set to bins list.
-bins = [4.25, 4.5, 4.75, 5, 5.25, 5.5, 5.75, 6, 6.25, 6.5, 6.75, 7, 7.25, 7.5, 7.75, 8]
-plt.hist(df["sepal_length"], bins = bins, color='green', edgecolor='black')
+# Histogram of Petal Width (all species)
+sns.FacetGrid(df,hue="species",height=5.5).map(sns.distplot,"petal_width").add_legend()
+plt.xlabel("Petal Width (cm)")
+plt.ylabel("Occurrance")
 # Format histogram.
+sns.set_style("darkgrid")
 plt.style.use('fivethirtyeight')
-plt.title("Sepal Length of Iris Flowers")
-plt.xlabel('Sepal Length (cm)')
-plt.ylabel('No. of observations')
+plt.title("Petal Width of Iris Flowers")
 plt.tight_layout()
-# Mark out a median value line.
-# median_SL = 5.8
-# color = '#fc4f30' 
-# plt.axvline(median_SL, color=color, label='Median Sepal Length', linewidth=4)
-plt.savefig("Hsepal_length.png")
+plt.savefig("Hpetal_width.png")
 plt.clf
 plt.show()
 #--------------------------------------------------------------------------------
 
+# Histogram of Sepal Length (all species)
+# Create hist with bin measures set to bins list.
+sns.FacetGrid(df,hue="species",height=5.5).map(sns.distplot,"sepal_length").add_legend()
+plt.xlabel("Sepal Length (cm)")
+plt.ylabel("Occurrance")
+# Format histogram style.
+sns.set_style("darkgrid")
+plt.style.use('fivethirtyeight')
+plt.title("Sepal Length of Iris Flowers")
+plt.tight_layout()
+plt.savefig("Hsepal_length.png")
+plt.clf
+plt.show()
+#---------------------------------------------------------------------------------
 # Histogram of Sepal Width (all species)
 # Create hist with bin measures set to bins list.
-bins = [2, 2.25, 2.5, 2.75, 3, 3.25, 3.5, 3.75, 4, 4.25, 4.5]
-plt.hist(df["sepal_width"], bins = bins, color='purple', edgecolor='black')
+sns.FacetGrid(df,hue="species",height=5.5).map(sns.distplot,"sepal_width").add_legend()
+plt.xlabel("Sepal Width (cm)")
+plt.ylabel("Occurrance")
 # Format histogram style.
+sns.set_style("darkgrid")
 plt.style.use('fivethirtyeight')
 plt.title("Sepal Width of Iris Flowers")
-plt.xlabel('Sepal Width (cm)')
-plt.ylabel('No. of observations')
 plt.tight_layout()
-# Marking out a median value line.
-# median_SW = 3
-# color = '#fc4f30' 
-# plt.axvline(median_SW, color=color, label='Median Sepal Width', linewidth=4)
 plt.savefig("Hsepal_width.png")
 plt.clf
 plt.show()
 #---------------------------------------------------------------------------------
+#  This program will create a scattergram of (a)Iris setosa, (b)Iris virginica 
+# and (c)Iris versicolor.
+iris = pd.read_csv('IrisDataset.csv')
+# Petal Length Vs Petal Width
+sns.set_style("darkgrid")
+df = sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=iris)
+plt.title("Iris Flowers: Petal Length Vs Petal Width")
+plt.savefig("scatter1.png")
+plt.clf
+plt.show()
+#--------------------------------------------------------------------------------
+# Petal Length Vs Sepal Length
+sns.set_style("darkgrid")
+df = sns.scatterplot(x="sepal_length", y="petal_length", hue="species", data=iris)
+plt.title("Iris Flowers: Sepal Length Vs Petal Length")
+plt.savefig("scatter2.png")
+plt.clf
+plt.show()
+#-------------------------------------------------------------------------------
+# Petal Length Vs Sepal Width 
+sns.set_style("darkgrid")
+df = sns.scatterplot(x="sepal_width", y="petal_length", hue="species", data=iris)
+plt.title("Iris Flowers: Sepal Width Vs Petal Length")
+plt.savefig("scatter3.png")
+plt.clf
+plt.show()
+#--------------------------------------------------------------------------------
+# Petal Width Vs Sepal Length
+sns.set_style("darkgrid")
+df = sns.scatterplot(x="sepal_length", y="petal_width", hue="species", data=iris)
+plt.title("Iris Flowers: Sepal Length Vs Petal Width")
+plt.savefig("scatter4.png")
+plt.clf
+plt.show()
+#--------------------------------------------------------------------------------
+# Petal Width Vs Sepal Width
+sns.set_style("darkgrid")
+df = sns.scatterplot(x="sepal_width", y="petal_width", hue="species", data=iris)
+plt.title("Iris Flowers: Sepal Width Vs Petal Width")
+plt.savefig("scatter5.png")
+plt.clf
+plt.show()
+#-------------------------------------------------------------------------------
+# Sepal Length Vs Sepal Width
+sns.set_style("darkgrid")
+df = sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=iris)
+plt.title("Iris Flowers: Sepal Length Vs Sepal Width")
+plt.savefig("scatter6.png")
+plt.clf
+plt.show()
+# Looking at the scatter plot it's noted that setosa can be distinguised from the other species
+# by using linear separation.
+# #------------------------------------------------------------------------------
