@@ -3,19 +3,29 @@ import pandas as pd
 import numpy as np
 import math
 
-class histogram:
-    df = pd.read_csv('IrisDataset.csv')
-    bins = 0
-    feature = ""
 
-    def graph(self, df, bins, feature):
-        return plt.hist(df[feature], bins = bins, edgecolor='black')
+df = pd.read_csv('IrisDataset.csv')
+# def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+
+class histogram:
+    df = 0
+    SW = 0
+    bins = []
+
+    def graph(self, df, SW, bins):
+        return plt.hist(SW, bins = [ ])
 
 p1 = histogram()
-df = pd.read_csv('IrisDataset.csv')
+SW = df["sepal_width"]
 bins = [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3, 3.25, 3.5, 3.75, 4, 
 4.25, 4.5, 4.75, 5, 5.25, 5.5, 5.75, 6, 6.25, 6.5, 6.75, 7, 7.25, 7.5]
-feature = df['sepal_length']
+
+
+bins = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75]
+plt.hist(df["petal_width"], bins = bins, edgecolor='black')
 
 
 #--------------------------------------------------------
