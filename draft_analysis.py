@@ -8,8 +8,33 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import seaborn as sns
+from statsmodels import robust
 df = pd.read_csv('IrisDataset.csv')
 #------------------------------------------------------------------------------
+
+# Q3(i): Output a summary of each variable to a single text file.
+
+# Use 'sys.stdout' to print statements to output a summary to the command line and then redirect to a text file.
+import sys # ref: https://stackoverflow.com/questions/17394846/print-the-output-in-txt-from-command-line-using-python
+orig_sys = sys.stdout  # ref: https://stackoverflow.com/questions/17394846/print-the-output-in-txt-from-command-line-using-python
+with open('summary.txt','w') as out: # ref: https://stackoverflow.com/questions/17394846/print-the-output-in-txt-from-command-line-using-python
+    sys.stdout = out
+    # Print 
+    print("No. of rows/no. of columns: ", df.shape, "\n\nNames of species/no. of vectors:") # (150, 5)
+    print(df["species"].value_counts(), "\n") 
+    # virginica     50, setosa        50, versicolor    50
+    # Name: species, dtype: int64
+    print(df.columns, "\n") # Index(['sepal_length', 'sepal_width', 'petal_length', 'petal_width',
+    # 'species'], dtype='object')
+    MAD1 = round(robust.mad(df["sepal_length"]), 6)
+    MAD2 = round(robust.mad(df["sepal_width"]), 6)
+    MAD3 = round(robust.mad(df["petal_length"]), 6)
+    MAD4 = round(robust.mad(df["petal_width"]), 6)
+    print("\n", df.describe(), "\nmad       ",MAD1,"   ",MAD2,"    ",MAD3,"   ",MAD4)
+
+#---------------------------------------------------------------------------------------------------
+
+# Q3(ii): Save a histogram of each variable to png files.
 
 # Histogram of Petal Length (all species)
 # Create hist with bin measures set to bins list.
@@ -68,9 +93,10 @@ plt.savefig("Hsepal_width.png")
 plt.clf
 plt.show()
 #---------------------------------------------------------------------------------
-#  This program will create a scattergram of (a)Iris setosa, (b)Iris virginica 
-# and (c)Iris versicolor.
+
+# Output a scatterplot of each pair of variables to png files.
 iris = pd.read_csv('IrisDataset.csv')
+
 # Petal Length Vs Petal Width
 sns.set_style("darkgrid")
 df = sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=iris)
@@ -121,3 +147,5 @@ plt.show()
 # Looking at the scatter plot it's noted that setosa can be distinguised from the other species
 # by using linear separation.
 # #------------------------------------------------------------------------------
+
+

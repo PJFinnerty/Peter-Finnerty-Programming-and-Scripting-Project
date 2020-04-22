@@ -37,3 +37,36 @@ plt.xlabel('Petal Width (cm)')
 plt.ylabel('No. of observations')
 plt.tight_layout()
 plt.show(PW_hist.graph() )
+
+
+# Calculate the Median Absolute Deviation
+# from statsmodels import robust
+# MAD_PL = robust.mad(df["petal_length"])
+# MAD_PW = robust.mad(df["petal_width"])
+# MAD_SL = robust.mad(df["sepal_length"])
+# MAD_SW = robust.mad(df["sepal_width"])
+# print(MAD_PL)
+# print(MAD_PW)
+# print(MAD_SL)
+# print(MAD_SW)
+# 
+# with open ('summary.txt', 'a') as f:
+#     f.write(MAD_PL)
+
+#print("Mean Sepal Length: ", np.mean(df["sepal_length"]), "\n", "Mean Sepal Width: ", np.mean(df["sepal_width"]) )
+#
+## Calculate the Median Absolute Deviation
+#
+#MAD_PL = 
+#print(
+## Calculate the median with an outlier:
+#print("Median Petal Length: ", np.median(np.append(df["petal_length"], 50) ) )
+# print(data.target[[10, 25, 50]] ) # [0 0 1]
+# print("Summary of Petal Length: \nMean Petal Length: ", np.mean(df["petal_length"]), "\nMAD of Petal Length: ", robust.mad(df["petal_width"]))
+
+# print("\nMean Petal Width: ", np.mean(df["petal_width"]) )
+
+
+# with open ('summary.txt', 'w') as f:
+#     f.write("Peter Finnerty - Iris Dataset Project\nThis text file contains a brief description of the \
+# variables contained in the Iris Dataset.\n\nSummary of Iris Dataset Variables", )

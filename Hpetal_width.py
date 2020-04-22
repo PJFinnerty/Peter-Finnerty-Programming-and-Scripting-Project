@@ -56,7 +56,10 @@ plt.show()
 
 # Calculate the Median Absolute Deviation
 from statsmodels import robust
-print(robust.mad(df["petal_width"]) )
+MAD_PL = robust.mad(df["petal_width"])
+print(MAD_PL)
+Median_PL = 
+
 
 #-----------------------------------------------------------------------------
 # To do: 
