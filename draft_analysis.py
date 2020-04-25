@@ -93,7 +93,7 @@ plt.savefig("Hsepal_width.png")
 plt.clf
 plt.show()
 #---------------------------------------------------------------------------------
-
+#---------------------------------------------------------------------------------
 # Output a scatterplot of each pair of variables to png files.
 iris = pd.read_csv('IrisDataset.csv')
 
@@ -146,6 +146,38 @@ plt.clf
 plt.show()
 # Looking at the scatter plot it's noted that setosa can be distinguised from the other species
 # by using linear separation.
-# #------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+# Creating box plot.
+import seaborn as sns
+sns.set_style("whitegrid")
+sns.boxplot(x = 'species', y = 'petal_length', hue='species', sym='c+', data = df)
+plt.title("Iris flowers: Box Plot of Petal Length")
+plt.show()
+
+# Creating a violin plot.
+sns.set_style("whitegrid")
+sns.violinplot(x = "species", y = "petal_length", hue='species', size = 8, data = df)
+plt.title("Iris flowers: Violin Plot of Petal Length")
+plt.show()
+
+# Compute and plot PDF of petal_length:
+# Reference: https://www.appliedaicourse.com/course/11/Applied-Machine-learning-course
+counts, bin_edges = np.histogram(df['petal_length'], bins = 10, density = True)
+pdf = counts / (sum(counts) )
+# Plotting the CDF using the cumulative sum function of Numpy.
+cdf = np.cumsum(pdf)
+plt.plot(bin_edges[1:], pdf)
+plt.plot(bin_edges[1:], cdf)
+plt.title("Petal Length PDF and CDF")
+plt.show()
+
+# Calculate the Median Absolute Deviation
+from statsmodels import robust
+print(robust.mad(df["petal_length"]) )
+
+
+
+
 
 
