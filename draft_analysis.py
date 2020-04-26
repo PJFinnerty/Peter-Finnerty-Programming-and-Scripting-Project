@@ -1,4 +1,4 @@
-# Peter Finnerty - Project 2020
+  # Peter Finnerty - Project 2020
 # Write a program called analysis.py that:
 # • outputs a summary of each variable to a single text file,
 # • saves a histogram of each variable to png files, and
@@ -97,7 +97,7 @@ plt.show()
 # Output a scatterplot of each pair of variables to png files.
 iris = pd.read_csv('IrisDataset.csv')
 
-# Petal Length Vs Petal Width
+# Scatterplot of Petal Length Vs Petal Width
 sns.set_style("darkgrid")
 df = sns.scatterplot(x="petal_length", y="petal_width", hue="species", data=iris)
 plt.title("Iris Flowers: Petal Length Vs Petal Width")
@@ -105,7 +105,7 @@ plt.savefig("scatter1.png")
 plt.clf
 plt.show()
 #--------------------------------------------------------------------------------
-# Petal Length Vs Sepal Length
+# Scatterplot of Petal Length Vs Sepal Length
 sns.set_style("darkgrid")
 df = sns.scatterplot(x="sepal_length", y="petal_length", hue="species", data=iris)
 plt.title("Iris Flowers: Sepal Length Vs Petal Length")
@@ -113,7 +113,7 @@ plt.savefig("scatter2.png")
 plt.clf
 plt.show()
 #-------------------------------------------------------------------------------
-# Petal Length Vs Sepal Width 
+# Scatterplot of Petal Length Vs Sepal Width 
 sns.set_style("darkgrid")
 df = sns.scatterplot(x="sepal_width", y="petal_length", hue="species", data=iris)
 plt.title("Iris Flowers: Sepal Width Vs Petal Length")
@@ -121,7 +121,7 @@ plt.savefig("scatter3.png")
 plt.clf
 plt.show()
 #--------------------------------------------------------------------------------
-# Petal Width Vs Sepal Length
+# Scatterplot of Petal Width Vs Sepal Length
 sns.set_style("darkgrid")
 df = sns.scatterplot(x="sepal_length", y="petal_width", hue="species", data=iris)
 plt.title("Iris Flowers: Sepal Length Vs Petal Width")
@@ -129,7 +129,7 @@ plt.savefig("scatter4.png")
 plt.clf
 plt.show()
 #--------------------------------------------------------------------------------
-# Petal Width Vs Sepal Width
+# Scatterplot of Petal Width Vs Sepal Width
 sns.set_style("darkgrid")
 df = sns.scatterplot(x="sepal_width", y="petal_width", hue="species", data=iris)
 plt.title("Iris Flowers: Sepal Width Vs Petal Width")
@@ -137,7 +137,7 @@ plt.savefig("scatter5.png")
 plt.clf
 plt.show()
 #-------------------------------------------------------------------------------
-# Sepal Length Vs Sepal Width
+# Scatterplot of Sepal Length Vs Sepal Width
 sns.set_style("darkgrid")
 df = sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=iris)
 plt.title("Iris Flowers: Sepal Length Vs Sepal Width")
@@ -148,36 +148,81 @@ plt.show()
 # by using linear separation.
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
-# Creating box plot.
-import seaborn as sns
-sns.set_style("whitegrid")
-sns.boxplot(x = 'species', y = 'petal_length', hue='species', sym='c+', data = df)
-plt.title("Iris flowers: Box Plot of Petal Length")
-plt.show()
-
-# Creating a violin plot.
-sns.set_style("whitegrid")
-sns.violinplot(x = "species", y = "petal_length", hue='species', size = 8, data = df)
-plt.title("Iris flowers: Violin Plot of Petal Length")
-plt.show()
-
 # Compute and plot PDF of petal_length:
-# Reference: https://www.appliedaicourse.com/course/11/Applied-Machine-learning-course
-counts, bin_edges = np.histogram(df['petal_length'], bins = 10, density = True)
+
+# Create large figure to fit 4 subplots, set title and style.
+plt.figure(figsize = (15, 6.5) ) 
+plt.suptitle("Probability Density Function (PDF) and Cumulative Distribution Function (CDF) of 4 Features")
+sns.set_style("darkgrid")
+
+# Create subplot 1: create counts and bin_edges variables and assign it to the histogram for 'petal_length', set bins to 10.
+
+plt.subplot(221) #(221) - the first two digits refer to the subplot formation (2 by 2) and the final digit assigns it as the first subplot.
+counts, bin_edges = np.histogram(df['petal_length'], bins = 10, density = True) # Reference: appliedaicourse.com
+# Create pdf variable and assign it the value of each x point on petal length histogram divided by the sum of the points.
 pdf = counts / (sum(counts) )
-# Plotting the CDF using the cumulative sum function of Numpy.
+# Use Numpys's cumulative sum function on 'pdf' variable and assign it to variable 'cdf'.
 cdf = np.cumsum(pdf)
-plt.plot(bin_edges[1:], pdf)
-plt.plot(bin_edges[1:], cdf)
-plt.title("Petal Length PDF and CDF")
+# Plot both CDF and PDF lines and label.
+plt.plot(bin_edges[1:], pdf, label = 'PDF') # Reference: appliedaicourse.com
+plt.plot(bin_edges[1:], cdf, label = 'CDF')
+# Assign titel and legend.
+plt.title("Petal Length")
+plt.legend()
+
+plt.subplot(222)
+counts, bin_edges = np.histogram(df['petal_width'], bins = 10, density = True)
+pdf = counts / (sum(counts) )
+cdf = np.cumsum(pdf)
+plt.plot(bin_edges[1:], pdf, label = 'PDF')
+plt.plot(bin_edges[1:], cdf, label = 'CDF')
+plt.title("Petal Width")
+plt.legend()
+
+plt.subplot(223)
+counts, bin_edges = np.histogram(df['sepal_length'], bins = 10, density = True)
+pdf = counts / (sum(counts) )
+cdf = np.cumsum(pdf)
+plt.plot(bin_edges[1:], pdf, label = 'PDF')
+plt.plot(bin_edges[1:], cdf, label = 'CDF')
+plt.title("Sepal Length")
+plt.legend()
+
+plt.subplot(224)
+counts, bin_edges = np.histogram(df['sepal_width'], bins = 10, density = True)
+pdf = counts / (sum(counts) )
+cdf = np.cumsum(pdf)
+plt.plot(bin_edges[1:], pdf, label = 'PDF')
+plt.plot(bin_edges[1:], cdf, label = 'CDF')
+plt.title("Sepal Width")
+plt.legend()
+
 plt.show()
 
-# Calculate the Median Absolute Deviation
-from statsmodels import robust
-print(robust.mad(df["petal_length"]) )
+#============================================================================================
 
+# Creating violin plots of the features.
 
+# Create large figure to fit 4 subplots, set title and style.
+plt.figure (figsize = (15, 6.5) ) 
+plt.suptitle("Iris Flowers: Violin Plots of Features")
+sns.set_style("darkgrid")
 
+# Create violin plot 1, add hue for species and format as necessary.
+plt.subplot(221)  #(221) - the first two digits refer to the subplot formation (2 by 2) and the final digit assigns it as the first subplot.
+sns.violinplot(x = "species", y = "petal_length", hue='species', size = 8, data = df)
+plt.title("Petal Length", ha = 'right')
 
+plt.subplot(222)
+sns.violinplot(x = "species", y = "petal_width", hue='species', size = 8, data = df)
+plt.title("Petal Width", ha = 'right' )
 
+plt.subplot(223)
+sns.violinplot(x = "species", y = "sepal_length", hue='species', size = 8, data = df)
+plt.title("Petal Width", ha = 'right')
 
+plt.subplot(224)
+sns.violinplot(x = "species", y = "sepal_width", hue='species', size = 8, data = df)
+plt.title("Petal Width", ha = 'right')
+
+plt.show()
