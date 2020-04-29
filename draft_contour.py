@@ -25,14 +25,14 @@ plt.show()
 
 
 # 2D Density Plot: PL v SL
-sns.jointplot(x="petal_length", y="sepal_length", data = virginica, kind = "kde")
+sns.jointplot(x="sepal_length", y="petal_length", data = virginica, kind = "kde")
 plt.suptitle("Virginica: Petal Length Vs Sepal Length")
 plt.savefig("virginica_C2.png")
 plt.clf
 plt.show()
 
 # 2d density plot: PL v SW
-sns.jointplot(x="petal_length", y="sepal_width", data = virginica, kind = "kde")
+sns.jointplot(x="sepal_width", y="petal_length", data = virginica, kind = "kde")
 plt.suptitle("Virginica: Petal Length Vs Sepal Width")
 plt.savefig("virginica_C3.png")
 plt.clf
