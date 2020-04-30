@@ -152,6 +152,36 @@ plt.show()
 #==================================================================================================
 # Supplementary Plots. 
 #==================================================================================================
+
+# 2 Scatter plots with alternative regression line for Section 3.1 of Summary.md.
+
+# Draw regression lines to distinguish Setosa in terms of SW and SL.
+
+# 2. Scatterplot of Petal Length Vs Sepal Length
+sns.set_style("darkgrid")
+iris = sns.scatterplot(x="sepal_length", y="petal_length", hue="species", data=df)
+x = [4.3, 6.0]
+y = [2.0, 2.0]
+plt.plot(x, y)
+plt.title("Scatter Plot: Sepal Length Vs Petal Length")
+plt.savefig("RLINE_ScatterSL_PL.png")
+plt.clf
+plt.show()
+
+
+# Scatterplot of Sepal Width Vs Petal Length
+# 3. Scatterplot of Petal Length Vs Sepal Width 
+sns.set_style("darkgrid")
+iris = sns.scatterplot(x="sepal_width", y="petal_length", hue="species", data=df)
+x = [2.0, 4.5]
+y = [2.0, 2.0]
+plt.plot(x, y)
+plt.title("Scatter Plot: Sepal Width Vs Petal Length")
+plt.savefig("RLINE_ScatterSW_PL.png")
+plt.clf
+plt.show()
+
+#--------------------------------------------------------------------------------------------------
 # Section 4(i) below feature scripts to create CDF/PDF graphs of SETOSA. 
 # These plots are used in the univariate analysis of the Iris dataset, as provided in 'summary.md' file (Q3,i)
 
@@ -443,16 +473,16 @@ plt.show()
 
 # Q3(i): Output a summary of each variable to a single text file.
 
-# Use 'sys.stdout' to print statements to output a summary to the command line and then redirect to a text file.
+# Use 'sys.stdout' to print statements to output a summary to the command line and then redirect to a Markdown file.
 import sys # ref: https://stackoverflow.com/questions/17394846/print-the-output-in-txt-from-command-line-using-python
 orig_sys = sys.stdout  # ref: https://stackoverflow.com/questions/17394846/print-the-output-in-txt-from-command-line-using-python
 with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/17394846/print-the-output-in-txt-from-command-line-using-python
     sys.stdout = out
-    # Print 
+    # Print to the screen and redirect to Summary.md, in Markdown format.
     print("# Investigation of the Iris Dataset")
 
     print("## 1. 'Summary.md' Overview")
-
+    
     print("This file relates to the Iris dataset and contains material outputted from 'Analysis.py'.\
     For more information on the background of this dataset please refer to the project\
     README.md file.\n")
@@ -479,6 +509,7 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     
     print("### 1.2. Table of Variable Statistics\n\n")
 
+    # Use information gleamed from '.describe' method to output information in format that will create table in MarkDown file.
     print("|Statistic Type  |Sepal Length|Sepal Width |Petal Length |Petal Width |")
     print("|  --- |  --------- |  --------- | ----------  |  ---------  |")
     print("|Datapoint Count | 150.000000 | 150.000000 |  150.000000 | 150.000000 |")
@@ -492,7 +523,13 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("|Median Absolute Deviation|   1.037822 |   0.370651 |    1.853253 |   1.037822 |\n\n")
 
     print("\n## **2. Univariate Analyis: Histograms and PDF/CDF Functions**\n\n")
-    print("## 2.1 Petal Length(PL)")
+    
+    # Use "! [] () " markdown function for adding image to md. file. Redirect to Summary.md.
+    print("## 2.1 Petal Length(PL)\n")
+    print("**Note: CDF/PDF plots found in section 2.5.**\n\n")
+    print("### Histogram of Petal Length feature:\n")
+    print( "![alt text](_Hist_petal_length.png)\n" )
+
     print("### Setosa\n")
     print("From observations immediately made under univariate analysis of 'Petal Length', Iris Setosa can be distinguised from the other classes.\n\
     Setosa is seen to have no measure of PL longer than 2cm. This is backed up by investigation of the CDF function of Setosa Petal Length in 'setosaCDF.png',\
@@ -507,7 +544,10 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Versicolor result:** moderate overlap with Virginica\n")
     print("**Virginica result:** moderate overlap with Versicolor\n\n")
 
-    print("## 2.2. Petal Width (PW)")
+    print("## 2.2. Petal Width (PW)\n")
+    print("### Histogram of Petal Width feature:\n")
+    print( "![alt text](_Hist_petal_width.png)\n" )
+
     print("### Setosa\n")
     print("Similarly to PL, the histogram of PW, shows Setosa\
     to be easily distinguished. A high peak is noted with just a few PW vectors just over 0.5cm.\
@@ -528,8 +568,11 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Setosa result:** highly distinguished from other species\n")
     print("**Versicolor result:** moderate overlap with Virginica\n")
     print("**Virginica result:** moderate overlap with Versicolor\n\n")
-    
+
     print("## 2.3. Sepal Length (SL)")
+    print("### Histogram of Sepal Length feature:\n")
+    print( "![alt text](_Hist_sepal_length.png)" )
+
     print("### Setosa")
     print("It is immediately clear that Sepal Length \
     provides much less useful data in terms of distinguishing species. It is clear that the vectors \
@@ -554,7 +597,11 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Versicolor result:** considerable degree of overlap with Setosa and Virginica\n")
     print("**Virginica result:** considerable degree of overlap with Versicolor\n\n") 
 
+
     print("## 2.4. Sepal Width (SW)")
+    print("### Histogram of Sepal Width feature:\n")
+    print( "![alt text](_Hist_sepal_width.png)" )
+
     print("### Versicolor")
     print("The histogram of Sepal Width provides the least \
     amount of distinguishing data. Unlike the other 3 features, however, Versicolor is the species \
@@ -573,10 +620,24 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Setosa result:** very large degree of overlap with Versicolor and Virginica\n")
     print("**Versicolor result:** very large degree of overlap with Setosa and Virginica\n")
     print("**Virgiica result: ** very large degree of overlap with Versicolor and Setosa\n\n")
+
+    print("## 2.5 CDF Plot for Setosa and joint plots for Versicolor and Virginica\n\n")
+    print("### CDF and PDF Plot of Setosa:\n")
+    print( "![alt text](CDF_Setosa.png)\n" )
+
+    print("### CDF and PDF Plot of Versicolor and Virginica Petal Length / Petal Width:\n")
+    print( "![alt text](CDF_Virg_V_Vers1.png)\n" )
+
+    print("### CDF and PDF Plot of Versicolor and Virginica Sepal Length / Sepal Width:\n")
+    print( "![alt text](CDF_Virg_V_Vers2.png)\n" )
    
     print("## **3. Bivariate Analyis: Scatter Plots and Contour Plots** \n\n")
     
-    print("## 3.1. Further Distinguishing Setosa")
+    print("## 3.1. Further Distinguishing Setosa\n")
+
+    print("### Scatter Plot for Sepal Length / Petal Length:\n")
+    print( "![alt text](RLINE_ScatterSL_PL.png)\n" )
+
     print("### Setosa Sepal Length")
     print("It is noted that Iris Setosa has been shown to be distinguishable in terms\
     of Petal Length and Petal Width. It is now necessary to distinguish it in terms\
@@ -587,6 +648,10 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     2-dimensional graph, firmly establishes the feature of Setosa Sepal Length,\
     by representing it's relationship to Petal Length.")
     print("### Setosa Sepal Width")
+
+    print("### Scatter Plot for Sepal Width / Petal Length:\n")
+    print( "![alt text](RLINE_ScatterSW_PL.png)\n" )
+
     print("Whilst a univariate representation of Setosa Sepal Width did not\
     provide a representation that defined the species, by plotting Sepal Width with\
     Petal Length, a high degree of separation is achieved. Iris Setosa are shown to\
@@ -613,7 +678,17 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     the contour plot, but the angle and of the line will drawn based on the scatter plots, to\
     provide the least amount of 'outlying' vectors on either side of the line.\n\n")
 
-    print("## 3.3. Petal Length V. Petal Width")
+    print("## 3.3. Petal Length V. Petal Width\n")
+
+    print("### Scatter Plot for Petal Length / Petal Width:\n")
+    print( "![alt text](_Scatter1.png)\n" )
+
+    print("### Contour Plot for Versicolor Petal Length / Petal Width:\n")
+    print( "![alt text](Vers_Contour1.png)\n" )
+
+    print("### Contour Plot for Virginica Petal Length / Petal Width:\n")
+    print( "![alt text](Virg_Contour_1.png)\n" )
+
     print("A study of the contour plot of Versicolor\
     displays that it has a densely populated central contour representing the Petal Legnth range\
     of 4.2cm to 4.75cm and a Petal Width range of 1.25cm-1.55cm. On the Virginica plot, as the\
@@ -638,7 +713,17 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Result:** Versicolor and Virginica have been distinguished to a high degree under\
     bivariate analysis of Petal Length and Petal Width.\n\n")
 
-    print("## 3.4. Sepal Length V. Petal Length")
+    print("## 3.4. Sepal Length V. Petal Length\n")
+
+    print("### Scatter Plot for Sepal Length / Petal Length:\n")
+    print( "![alt text](_Scatter2.png)\n" )
+
+    print("### Contour Plot for Versicolor Sepal Length / Petal Length:\n")
+    print( "![alt text](Vers_Contour2.png)\n" )
+
+    print("### Contour Plot for Virginica Sepal Length / Petal Length:\n")
+    print( "![alt text](Virg_Contour_2.png)\n" )
+
     print("A study of the individual contour plots of\
     Virginica and Versicolor, show that the central contours in both plots, have a moderate\
     degree of separation from one another, in terms of the measurement ranges that contain\
@@ -659,7 +744,17 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Result:** Versicolor and Virginica have been moderately distinguished under\
     bivariate analysis of Petal Length and Sepal Length.\n\n")
 
-    print("## 3.5. Sepal Width V Petal Length")
+    print("## 3.5. Sepal Width V. Petal Length\n")
+
+    print("### Scatter Plot for Sepal Width / Petal Length:\n")
+    print( "![alt text](_Scatter3.png)\n" )
+
+    print("### Contour Plot for Versicolor Sepal Width, Petal Length:\n")
+    print( "![alt text](Vers_Contour3.png)\n" )
+
+    print("### Contour Plot for Virginica Sepal Width / Petal Length:\n")
+    print( "![alt text](Virg_Contour_3.png)\n" )
+
     print("The contour plot of Versicolor in terms of SW\
     and PL contains a very small central contour. As a result the 3 centre contours will\
     be considered the area of greatest density. This area ranges from 2.7cm-3.3cm in SW and\
@@ -678,8 +773,18 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Result:** linear regression here has achieved 86 percent accuracy in distinguishing the\
     two species in terms of Sepal Width and Petal Length.\n\n")
 
-    print("## 3.6. Sepal Length V. Petal Width")
-    print("The contour plot of Versicolor SL/SW, taking the two\
+    print("## 3.6. Sepal Length V. Petal Width\n")
+
+    print("### Scatter Plot for Sepal Length / Petal Width:\n")
+    print( "![alt text](_Scatter4.png)\n" )
+
+    print("### Contour Plot for Versicolor Sepal Length / Petal Width:\n")
+    print( "![alt text](Vers_Contour4.png)\n" )
+
+    print("### Contour Plot for Virginica Sepal Length / Petal Width:\n")
+    print( "![alt text](Virg_Contour_4.png)\n" )
+
+    print("The contour plot of Versicolor SL/PW, taking the two\
     central contours as the dense region for comparison with the scatter plot, ranges from\
     5.5cm-6cm in SL and 1.2cm-1.35cm in PW. As such this is a relatively small, but\
     dense centre. Comparing the contours of Versicolor with Virginica, it's noteed that whilst\
@@ -705,7 +810,17 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Result:** linear separation of both species has been achieved via Petal Width to 86 percent\
     accuracy\n\n")
 
-    print("## 3.7. Sepal Width V. Petal Width")
+    print("## 3.6. Sepal Width V. Petal Width\n")
+
+    print("### Scatter Plot for Sepal Width / Petal Width:\n")
+    print( "![alt text](_Scatter5.png)\n" )
+
+    print("### Contour Plot for Versicolor Sepal Width / Petal Width:\n")
+    print( "![alt text](Vers_Contour5.png)\n" )
+
+    print("### Contour Plot for Virginica Sepal Width / Petal Width:\n")
+    print( "![alt text](Virg_Contour_5.png)\n" )
+
     print("Once again investigating the two most inner contours\
     Versicolor is seen to have very little separation from Virginica in terms of the density of\
     the Sepal Width vectors. As such this investigation will look at Petal Width. The range of\
@@ -728,7 +843,17 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Result:** linear separation has been moderately successful in distinguishing Versicolor from\
     Virginica in terms of Petal Width.\n\n")
 
-    print("## 3.8. Sepal Length V. Sepal Width")
+    print("## 3.8. Sepal Length V. Sepal Width\n")
+
+    print("### Scatter Plot for Sepal Length / Sepal Width:\n")
+    print( "![alt text](_Scatter6.png)\n" )
+
+    print("### Contour Plot for Versicolor Sepal Length / Sepal Width:\n")
+    print( "![alt text](Vers_Contour6.png)\n" )
+
+    print("### Contour Plot for Virginica Sepal Length / Sepal Width:\n")
+    print( "![alt text](Virg_Contour_6.png)\n" )
+
     print("Looking at the scatter plot of SL/SW, a massive\
     degree of overlap is seen, to the extent that it is difficult to identify vectors that can\
     be classified as outliers. Comparing this to the contour plots of both species for these\
@@ -749,5 +874,4 @@ with open('summary.md','w') as out: # ref: https://stackoverflow.com/questions/1
     print("**Result:** linear regression is not capable of separating the two species in terms of\
     Sepal Length and Sepal Width. The use of contour plots in conjunction with the scatter plot\
     will not provide a valuable outcome.\n")
-
-
+    
